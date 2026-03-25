@@ -62,11 +62,17 @@ def get_by_genre(genre_id):
     url = f"https://api.themoviedb.org/3/discover/movie?api_key={API_KEY}&with_genres={genre_id}&sort_by=popularity.desc"
     return requests.get(url).json()['results'][:5]
 
-# 3. Load Data
+
+# OLD (Thappu):
+# path = r"C:\Users\saira\Projects\Netflix-recommendation-engine\data\movie_titles _1_.csv"
+
+# NEW (Correct):
 @st.cache_data
 def load_data():
-    path = r"C:\Users\saira\Projects\Netflix-recommendation-engine\data\movie_titles _1_.csv"
+    # Direct ga GitHub folder structure ni follow avvu
+    path = "data/movie_titles _1_.csv" 
     return pd.read_csv(path, encoding="latin1", header=None, names=['Movie_Id', 'Year', 'Name'], on_bad_lines='skip', engine='python')
+
 
 movie_titles = load_data()
 
